@@ -1,4 +1,3 @@
-```markdown
 # YTP Deluxe Generator — Legacy Update (Assets, Beta Key, Auto YTP, 2009/2012 Modes)
 
 This update extends the original "YTP Deluxe Generator (Legacy)" with legacy-friendly features and scaffolding so you can run on older Windows (XP / Vista / 7) and older Python (2.7 / 3.x). It adds:
