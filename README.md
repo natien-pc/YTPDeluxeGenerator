@@ -1,4 +1,3 @@
-```markdown
 # YTP Deluxe Generator — Legacy Complete Update (Assets, Effects, Beta Key)
 
 A retro-friendly YouTube Poop (YTP) generator targeted at older Windows (XP / Vista / 7) and legacy Python (2.7 recommended; Python 3.4–3.7 workable). This release collects the full feature set, improved asset-folder scanning, per-effect toggles with probability and level, legacy-mode presets (2009 / 2012), a quick low-res Preview 2, and an Auto-Generate batch gated by a simple legacy beta key.
