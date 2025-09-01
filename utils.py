@@ -21,14 +21,11 @@ def which(exe_name):
 def find_ffmpeg():
     ffmpeg = which('ffmpeg') or which('ffmpeg.exe')
     ffplay = which('ffplay') or which('ffplay.exe')
-    # Also accept ffmpeg in current dir
     cur = os.getcwd()
-    if not ffmpeg:
-        if os.path.exists(os.path.join(cur, 'ffmpeg.exe')):
-            ffmpeg = os.path.join(cur, 'ffmpeg.exe')
-    if not ffplay:
-        if os.path.exists(os.path.join(cur, 'ffplay.exe')):
-            ffplay = os.path.join(cur, 'ffplay.exe')
+    if not ffmpeg and os.path.exists(os.path.join(cur, 'ffmpeg.exe')):
+        ffmpeg = os.path.join(cur, 'ffmpeg.exe')
+    if not ffplay and os.path.exists(os.path.join(cur, 'ffplay.exe')):
+        ffplay = os.path.join(cur, 'ffplay.exe')
     return ffmpeg, ffplay
 
 def safe_tempfile(suffix='', prefix='ytp_', dir=None):
@@ -80,8 +77,8 @@ def is_valid_beta_key(key):
     try:
         if not key:
             return False
-        keyu = key.strip().upper()
-        if keyu.startswith('OLD-') or keyu.startswith('BETA') or len(keyu) >= 8:
+        k = key.strip().upper()
+        if k.startswith('OLD-') or k.startswith('BETA') or len(k) >= 8:
             return True
     except Exception:
         pass

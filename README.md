@@ -1,58 +1,67 @@
 ```markdown
-# YTP Deluxe Generator — Legacy Complete Update
+# YTP Deluxe Generator — Legacy Complete Update (Assets, Effects, Beta Key)
 
-This update packages a retro-friendly YouTube Poop (YTP) generator that targets old Windows (XP / Vista / 7) and older Python (2.7 recommended, Python 3.4–3.7 will also work). It aims to be compatible with older FFmpeg builds by using simple sequential commands, fallbacks, and small temporary files.
+A retro-friendly YouTube Poop (YTP) generator targeted at older Windows (XP / Vista / 7) and legacy Python (2.7 recommended; Python 3.4–3.7 workable). This release collects the full feature set, improved asset-folder scanning, per-effect toggles with probability and level, legacy-mode presets (2009 / 2012), a quick low-res Preview 2, and an Auto-Generate batch gated by a simple legacy beta key.
 
-What's included in this update
-- Full Tkinter GUI (main.py) with:
-  - Per-effect toggles, probability and level fields (common options)
-  - Beta-key support (legacy-style `beta_key.txt`)
-  - Asset browsing and automatic asset discovery in `assets/` subfolders
-  - Preview and Preview 2 (fast low-res preview)
-  - Auto-generate batch feature (requires a valid beta key)
-- Engine (engine.py) implementing all requested effects:
-  - Random Sound overlay
-  - Reverse (video + audio)
+This project expects a working ffmpeg.exe (and optionally ffplay.exe) in PATH or in the project folder. It intentionally uses simple sequential ffmpeg calls and fallbacks (mpeg4 / libmp3lame) so it will run on older static FFmpeg builds.
+
+Key features
+- Effects implemented or scaffolded:
+  - Random Sound overlay (audio)
+  - Reverse clip (video + audio)
   - Speed up / Slow down (setpts + atempo with chain support)
-  - Chorus (aecho approximation)
+  - Chorus (approx via aecho)
   - Vibrato / Pitch bend (asetrate + atempo approximation)
   - Stutter loop
-  - Earrape (large gain)
-  - Auto-tune placeholder (external tool integration)
+  - Earrape Mode (large gain)
+  - Auto-Tune Chaos (placeholder — external autotune tool required)
   - Dance & Squidward mode (video transforms)
   - Invert colors
-  - Rainbow overlay (user-provided PNG/GIF/JPG)
-  - Mirror mode
-  - Sus effect (random pitch/tempo)
-  - Explosion spam (repeated overlays)
-  - Frame shuffle (simple implementation via frames on disk)
-  - Meme injection (image/audio)
-  - Sentence mixing / random clip shuffle / random cuts
-- Asset folder guidance and automatic picking:
-  - assets/sounds/
-  - assets/images/
-  - assets/errors/
-  - assets/adverts/
-  - assets/overlays_videos/
-- Fallbacks for older FFmpeg builds (mpeg4/libmp3lame) where libx264/aac are unavailable.
-- A simple legacy batch file to run on old Windows (run_legacy.bat).
+  - Rainbow / Meme overlay (user-provided or auto-picked from assets/)
+  - Mirror Mode
+  - Sus Effect (random pitch/tempo)
+  - Explosion Spam (repetitive overlays)
+  - Frame Shuffle (simple sample implementation)
+  - Meme Injection (image/audio mix)
+  - Sentence Mixing / Random clip shuffle / Random cuts
+- Per-effect toggles, probability (0.0–1.0), and a level/value field
+- Asset discovery and auto-pick from structured assets/ subfolders:
+  - assets/sounds/, assets/images/, assets/errors/, assets/adverts/, assets/overlays_videos/, assets/dance_sounds/
+- Legacy-mode presets: 2009 Mode (web-era look) and 2012 Mode (meme-era look)
+- Preview (play output with ffplay) and Preview 2 (fast low-res sample with heavy effect)
+- Auto-Generate batch (requires legacy beta key in beta_key.txt or entered in GUI)
+- Small run_legacy.bat for one-click launching on old Windows
 
-How to use (short)
-1. Put ffmpeg.exe and ffplay.exe (optional) into the project folder or add them to PATH.
-2. Place your assets (small PNGs, JPGs, GIFs, WAV/MP3, short MP4 overlays) into the corresponding assets/ subfolders.
-3. Create a `beta_key.txt` with a legacy key like `OLD-MY-KEY-2009` to unlock Auto-Generate.
-4. Run:
-   - python main.py
-5. Select input, choose effects and assets, then Generate. Use Preview 2 on short clips to check heavy effects quickly.
+Quick start
+1. Put ffmpeg.exe (and optionally ffplay.exe) in the project folder or on PATH.
+2. Put Python 2.7 (best for XP) or Python 3.4–3.7 on the machine.
+3. Create the assets folder with recommended subfolders (see assets/README.txt).
+4. Create a file `beta_key.txt` with a legacy key such as `OLD-MY-KEY-2009` to enable Auto-Generate.
+5. Run:
+   python main.py
+6. Use the GUI to:
+   - Pick input and output.
+   - Toggle effects, click "Configure Effects" to set per-effect probability and level.
+   - Use Preview 2 to check heavy effects quickly.
+   - Use Auto-Generate to create many randomized YTPs (beta key required).
 
-Notes & compatibility
-- Designed to work with older FFmpeg by doing multiple sequential commands instead of complex filtergraphs.
-- Avoid running on very long source files during testing — try 5–10 second clips first.
-- Auto-tune is left as a placeholder; integrate an external autotune binary by adjusting engine._autotune_placeholder.
+Compatibility notes and tips
+- Test on short clips (5–15 seconds) first.
+- Use `-preset ultrafast` or `-preset veryfast` for faster encodes on weak CPUs.
+- If libx264/aac aren't available in your ffmpeg build, the engine attempts fallback to mpeg4/libmp3lame.
+- Some filters may be missing from extremely old ffmpeg builds; fallback options or removing that effect helps.
+- The Auto-Tune feature is a placeholder. To integrate autotune, point the engine at an external autotune binary/tool and add command-line invocation.
 
-If you want I can:
-- Produce a ready-to-run ZIP for Windows XP (with a small HowTo text and a sample assets pack of free-to-use images).
-- Add a local key-generation tool to create signed keys that the engine will accept offline.
+Files provided
+- main.py — Tkinter GUI with effect controls and asset browsing
+- engine.py — effect implementations and FFmpeg command orchestration
+- utils.py — helpers (ffmpeg detection, temp files, beta-key validator, asset listing)
+- assets/README.txt — how to structure assets/ and recommended filenames
+- run_legacy.bat — small convenience script to run the GUI on older Windows
 
-Now the key project files follow.
+If you want, I can create:
+- a ZIP with a tiny public-domain assets pack for testing,
+- a pure-batch non-GUI script that runs a safe legacy-only pipeline,
+- or add a tiny offline key-generator that emits keys your engine will accept.
+
 ```
