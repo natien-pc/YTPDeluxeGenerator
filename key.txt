@@ -1,0 +1,5 @@
+python gen_beta_key.py --secret my-secret-here --user modymembet --days 30 out beta_key.txt
+
+let pre-beta serial key is poop program
+BETA|modymembet|1759337037|0e3eb43a371a6a26|68d4c54b282ce918af5c301c1afc6295ddcc
+ea8195573c8f9eb661f58ac72a24
