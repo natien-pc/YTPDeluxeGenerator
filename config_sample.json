@@ -1,0 +1,17 @@
+{
+  "reverse": {"enabled": false, "prob": 1.0},
+  "speed": {"enabled": true, "prob": 1.0, "level": 1.4},
+  "stutter": {"enabled": true, "prob": 0.8, "level": 3},
+  "earrape": {"enabled": false, "prob": 0.5, "level": 20.0},
+  "chorus": {"enabled": true, "prob": 0.6, "level": 0.6},
+  "vibrato": {"enabled": true, "prob": 0.6, "level": 1.05},
+  "invert": {"enabled": false, "prob": 0.5},
+  "mirror": {"enabled": false, "prob": 0.5},
+  "dance": {"enabled": false, "prob": 0.4},
+  "rainbow": {"enabled": false, "prob": 0.6, "asset": "", "opacity": 0.8},
+  "explosion": {"enabled": false, "prob": 0.5, "asset": "", "count": 4},
+  "frame_shuffle": {"enabled": false, "prob": 0.3, "level": 10},
+  "meme": {"enabled": false, "prob": 0.5, "image": ""},
+  "random_sound": {"enabled": false, "prob": 0.7, "asset": "", "count": 3},
+  "sentence_mix": {"enabled": false, "parts": 6}
+}
