@@ -1,45 +1,58 @@
-# YTP Deluxe Generator — Legacy Update (Assets, Beta Key, Auto YTP, 2009/2012 Modes)
+```markdown
+# YTP Deluxe Generator — Legacy Complete Update
 
-This update extends the original "YTP Deluxe Generator (Legacy)" with legacy-friendly features and scaffolding so you can run on older Windows (XP / Vista / 7) and older Python (2.7 / 3.x). It adds:
+This update packages a retro-friendly YouTube Poop (YTP) generator that targets old Windows (XP / Vista / 7) and older Python (2.7 recommended, Python 3.4–3.7 will also work). It aims to be compatible with older FFmpeg builds by using simple sequential commands, fallbacks, and small temporary files.
 
-- Beta key handling (simple legacy-style key file).
-- Assets folder guidance for old OS sounds/images/error-message-style overlays and advert overlays.
-- New "2009 mode" and "2012 mode" presets (old-era look & transforms).
-- Preview 2: alternate preview mode that shows a fast low-res preview with extra effects.
-- Automatic YTP generation: batch/generate many randomized outputs (requires beta key unlock).
-- GUI updates: fields for beta key, assets, mode toggles, Auto Generate button and Preview 2 button.
-- Updated config sample for the new fields.
+What's included in this update
+- Full Tkinter GUI (main.py) with:
+  - Per-effect toggles, probability and level fields (common options)
+  - Beta-key support (legacy-style `beta_key.txt`)
+  - Asset browsing and automatic asset discovery in `assets/` subfolders
+  - Preview and Preview 2 (fast low-res preview)
+  - Auto-generate batch feature (requires a valid beta key)
+- Engine (engine.py) implementing all requested effects:
+  - Random Sound overlay
+  - Reverse (video + audio)
+  - Speed up / Slow down (setpts + atempo with chain support)
+  - Chorus (aecho approximation)
+  - Vibrato / Pitch bend (asetrate + atempo approximation)
+  - Stutter loop
+  - Earrape (large gain)
+  - Auto-tune placeholder (external tool integration)
+  - Dance & Squidward mode (video transforms)
+  - Invert colors
+  - Rainbow overlay (user-provided PNG/GIF/JPG)
+  - Mirror mode
+  - Sus effect (random pitch/tempo)
+  - Explosion spam (repeated overlays)
+  - Frame shuffle (simple implementation via frames on disk)
+  - Meme injection (image/audio)
+  - Sentence mixing / random clip shuffle / random cuts
+- Asset folder guidance and automatic picking:
+  - assets/sounds/
+  - assets/images/
+  - assets/errors/
+  - assets/adverts/
+  - assets/overlays_videos/
+- Fallbacks for older FFmpeg builds (mpeg4/libmp3lame) where libx264/aac are unavailable.
+- A simple legacy batch file to run on old Windows (run_legacy.bat).
 
-Important: This repository does not ship copyrighted OS images or sounds. The assets directory contains guidance and placeholder names — put your own legacy OS sounds, error message images, old adverts, and other media into the assets folder.
-
-Quick start
-1. Put ffmpeg.exe (and ffplay.exe if you want preview) in the project directory or on PATH.
-2. Put Python 2.7 (recommended for XP) or Python 3.x on your machine.
-3. Place your legacy assets (PNG/JPG/GIF images and WAV/MP3 sounds) into the `assets/` folder (see assets/README.txt).
-4. Create a file named `beta_key.txt` in the project directory containing your beta key (format: OLD-...).
-   - Auto-generation is locked unless a valid key is present.
-   - For testing you can use a key that starts with `OLD-` (the validator accepts keys that start with `OLD-`).
-5. Run:
+How to use (short)
+1. Put ffmpeg.exe and ffplay.exe (optional) into the project folder or add them to PATH.
+2. Place your assets (small PNGs, JPGs, GIFs, WAV/MP3, short MP4 overlays) into the corresponding assets/ subfolders.
+3. Create a `beta_key.txt` with a legacy key like `OLD-MY-KEY-2009` to unlock Auto-Generate.
+4. Run:
    - python main.py
-6. Use the GUI: pick input video, choose output, set mode (2009/2012), toggle effects or click "Auto Generate" (if beta key valid). Use "Preview 2" to quickly inspect a low-res effect sample.
+5. Select input, choose effects and assets, then Generate. Use Preview 2 on short clips to check heavy effects quickly.
 
-Notes for old systems
-- Use small clips when testing.
-- Use `-preset ultrafast` to reduce CPU load.
-- If libx264 or aac is missing, the engine provides fallbacks in comments; edit engine.py if necessary.
-- Preview uses ffplay; if unavailable, engine prints instructions to open the file manually.
+Notes & compatibility
+- Designed to work with older FFmpeg by doing multiple sequential commands instead of complex filtergraphs.
+- Avoid running on very long source files during testing — try 5–10 second clips first.
+- Auto-tune is left as a placeholder; integrate an external autotune binary by adjusting engine._autotune_placeholder.
 
-Files updated in this release
-- main.py — GUI with beta key, auto-generate and mode toggles, Preview 2.
-- engine.py — new 2009/2012 modes, preview2, auto-generate, beta-check integration.
-- utils.py — beta key helpers and asset helpers.
-- config_sample_updated.json — example settings including new options.
-- assets/README.txt — where to put your old OS sounds/images and naming guidance.
+If you want I can:
+- Produce a ready-to-run ZIP for Windows XP (with a small HowTo text and a sample assets pack of free-to-use images).
+- Add a local key-generation tool to create signed keys that the engine will accept offline.
 
-If you'd like, I can:
-- Add an optional "legacy-mode" batch (.bat) that picks safe codecs for very old ffmpeg builds.
-- Add a script that scans a folder of assets and validates compatibility (image formats, audio sample rates).
-- Add a small installer or packaged ZIP optimized for XP-era machines.
-
-What's next: I updated the code in this message so you can drop these files into your project folder and test immediately. Below are the updated files.
+Now the key project files follow.
 ```
